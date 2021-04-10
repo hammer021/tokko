@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2021 at 03:33 PM
+-- Generation Time: Apr 10, 2021 at 08:36 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -42,7 +42,7 @@ CREATE TABLE `account` (
 
 INSERT INTO `account` (`id_account`, `username`, `password`, `saldo`, `id_role`) VALUES
 (1, 'admin', 'admin', 0, 1),
-(2, 'joko', '123', 20000, 2);
+(5, 'cek', '6ab97dc5c706cfdc425ca52a65d97b0d', 10000, 2);
 
 -- --------------------------------------------------------
 
@@ -52,8 +52,8 @@ INSERT INTO `account` (`id_account`, `username`, `password`, `saldo`, `id_role`)
 
 CREATE TABLE `orders` (
   `id_order` int(11) NOT NULL,
-  `id_account` int(11) NOT NULL,
-  `id_produk` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `id_produk` varchar(255) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `total` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -62,8 +62,8 @@ CREATE TABLE `orders` (
 -- Triggers `orders`
 --
 DELIMITER $$
-CREATE TRIGGER `stokk` AFTER DELETE ON `orders` FOR EACH ROW UPDATE produk SET stok = stok + OLD.jumlah
-WHERE id_produk = OLD.id_produk
+CREATE TRIGGER `stokk` AFTER INSERT ON `orders` FOR EACH ROW UPDATE produk SET stok = stok - NEW.jumlah 
+WHERE id_produk = NEW.id_produk
 $$
 DELIMITER ;
 
@@ -85,7 +85,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga`, `stok`) VALUES
-('PRO0001', 'Kacang', 1000, 122),
+('PRO0001', 'Kacang', 1000, 10),
 ('PRO0002', 'Manisan', 20000, 10);
 
 -- --------------------------------------------------------
@@ -143,13 +143,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id_account` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_account` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
