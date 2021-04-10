@@ -73,6 +73,6 @@ class member_model extends CI_Model
 
     public function hapus_data($id)
     {
-        return $this->db->delete($this->_table, array("id_produk" => $id));
+        return $this->db->delete($this->_table, array("id_account" => $id));
     }
 }

@@ -20,7 +20,7 @@ class Member extends CI_Controller
     public function save()
     {
         $username = $this->input->post('username');
-        $password = $this->input->post('password');
+        $password = md5($this->input->post('password'));
        if($username!==null){
         $data = array(
             'username '    		        => $username,
@@ -70,8 +70,8 @@ class Member extends CI_Controller
   
     public function hapus($id)
     {
-        $this->produk_model->hapus_data($id);
-		redirect('Produk');
+        $this->member_model->hapus_data($id);
+		redirect('Member');
     }
     
 }

@@ -66,8 +66,8 @@
 										<td>
                       
                       <button type="button" data-target="#<?php echo $mem->id_account ?>" class="fas fa-edit" data-toggle="modal" >Edit</button>
-                      <a href="" data-toggle="modal" data-target="#hapusModal"><button type="button" class="fas fa-trash">Hapus</button></a>&nbsp;
-													<div class="modal fade" id="hapusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <a href="" data-toggle="modal" data-target="#hapusModal<?php echo $mem->id_account ?>"><button type="button" class="fas fa-trash">Hapus</button></a>&nbsp;
+													<div class="modal fade" id="hapusModal<?php echo $mem->id_account ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog" role="document">
 															<div class="modal-content">
 																<div class="modal-header">
@@ -127,7 +127,7 @@ foreach ($member as $u) {
 							<input type ="hidden" name="saldo" value="<?php echo $u->saldo ?>">
 							<label for="exampleInputEmail1">Username : <?php echo $u->username ?></label>
 							<label for="exampleInputEmail1">Saldo : Rp. <?php echo $u->saldo ?></label>
-						</br>w.
+						</br>
 								</br>
 							<label for="exampleInputEmail1">Tambah Saldo : </label>
               <input type="number" class="form-control" name="tsaldo" id="tsaldo" value="">
