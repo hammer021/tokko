@@ -140,7 +140,16 @@
                 </a>
                 <h5>
                   <strong>
-                    <a href="<?php echo base_url('Produk/getById/'.$p->id_produk);?>" class="dark-grey-text"><?php echo $p->nama_produk?>
+                  <?php 
+                  $usr = $this->session->userdata("nama");
+                  if ($usr == null){
+                    ?>
+                    <a href="#" class="dark-grey-text"><?php echo $p->nama_produk?>
+                  <?php } 
+                  else{?>
+                  <a href="<?php echo base_url('Produk/getById/'.$p->id_produk);?>" class="dark-grey-text"><?php echo $p->nama_produk?>
+                  <?php }?>
+                    
                       <!-- <span class="badge badge-pill danger-color">NEW</span> -->
                     </a>
                   </strong>

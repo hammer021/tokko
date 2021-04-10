@@ -5,7 +5,7 @@ class order_model extends CI_Model
     private $_table = "orders";
 
     public $id_order;
-    public $id_account;
+    public $username;
     public $id_produk;
     public $jumlah;
     public $total;
@@ -15,8 +15,8 @@ class order_model extends CI_Model
         return [
             
 
-            ['field' => 'id_account',
-            'label' => 'id_account',
+            ['field' => 'username',
+            'label' => 'username',
             'rules' => 'required'],
 
             ['field' => 'id_produk',
@@ -50,22 +50,14 @@ class order_model extends CI_Model
     $query = $this->db->get()->result();
     return $query;
    }
-    public function save()
-    {
-      
-        $post = $this->input->post();
-        $this->id_account = $this->session->userdata("id_account");
-        $this->id_produk = $post["id_produk"];
-        $this->jumlah = $post["jumlah"];
-        $this->total = $post["total"];
-        return $this->db->insert($this->_table, $this);
-    }
+   function add($data, $table){
+    $this->db->insert($table, $data);
+}
 
-    public function update_data($where,$data){
-		$this->db->where($where);
-		$this->db->update('produk',$data);
-    }
-
+function update($where,$data,$table){
+    $this->db->where($where);
+    $this->db->update($table,$data);
+}	
     public function hapus_data($id)
     {
         return $this->db->delete($this->_table, array("id_produk" => $id));

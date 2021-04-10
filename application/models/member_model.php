@@ -35,9 +35,14 @@ class member_model extends CI_Model
 
     }
    
-    public function getById($id)
+    public function getSaldo($id)
     {
-        return $this->db->get_where($this->_table, ["kd_barang" => $id])->row();
+        $this->db->select('account.saldo');
+        $this->db->from('account');
+		$this->db->where('id_role','2');
+        $this->db->where('username',$id);
+        $query = $this->db->get()->result();
+        return $query;
     }
     public function buat_kode(){
         $this->db->select('RIGHT(account.id_account,2) as kode',FALSE);

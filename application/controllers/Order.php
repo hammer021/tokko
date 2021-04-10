@@ -8,6 +8,8 @@ class Order extends CI_Controller
     {
         parent::__construct();
         $this->load->model("order_model");
+        $this->load->model("produk_model");
+        $this->load->model("member_model");
         $this->load->library('form_validation');
     }
 
@@ -18,16 +20,57 @@ class Order extends CI_Controller
     }
     public function add()
     {
-        $order = $this->order_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($order->rules());
 
-        if ($validation->run()) {
-            $order->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
+        $username = $this->session->userdata("nama");
+        $saldo = $this->member_model->getSaldo($username);
+        $id_produk = $this->input->post('id_produk');
+        $stok = $this->produk_model->getStok($id_produk);
+        $jumlah = $this->input->post('jumlah');
+        $total =$this->input->post('total');
+        // $saldomin = $saldo - $total;
+        // $stokmin = $stok - $jumlah;
+        if($stok > $jumlah){
+            if($saldo > $total){
+                    if ($username !== null) {
+                        $data = array(
+                            'username'    		    => $username,
+                            'id_produk'          	=> $id_produk,
+                            'jumlah'         	    => $jumlah,
+                            'total'         		=> $total
+
+                        );
+                        // $where = array(
+                        //     'id_produk'          		=> $id_produk
+                        // );
+                        // $where2 = array(
+                        //     'username'          		=> $username
+                        // );
+                        // $data2 = array(
+                        //     'saldo'    		    => $saldomin
+
+                        // );
+                        // $data3 = array(
+                        //     'stok'    		    => $stokmin
+
+                        // );
+                        // $this->order_model->update_data($where, $data3, 'produk');
+                        // $this->order_model->update_data($where2, $data2, 'account');
+                        $this->order_model->add($data, 'orders');
+                        echo "data berhasil disimpan";
+                        redirect(site_url("Home"));
+                    }
+                    else {
+                        echo "data gagal disimpan";
+                    }
+                }
+                else{
+                    echo "Saldo tidak cukup";
+                }
         }
-
-        redirect(site_url("Home"));
+        else {
+            echo "Stok tidak cukup";
+        }
+        
     }
     
     public function edit()

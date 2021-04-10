@@ -45,7 +45,15 @@ class produk_model extends CI_Model
     $query = $this->db->get()->result();
     return $query;
    }
-    
+   
+   public function getStok($id)
+   {
+    $this->db->select('produk.stok');
+    $this->db->from('produk');
+    $this->db->where('id_produk',$id);
+    $query = $this->db->get()->result();
+    return $query;
+   }
     public function buat_kode(){
         $this->db->select('RIGHT(produk.id_produk,2) as kode',FALSE);
         $this->db->order_by('id_produk', 'DESC');

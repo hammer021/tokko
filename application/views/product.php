@@ -145,18 +145,20 @@
                   $no = 1; foreach($produk as $p):?>
                     <tr>
                     <td><?php echo $no ?></td>
-                    <td><?php echo $p->nama_produk ?></td>
-                    <td><input type="text" name="harga" id="harga" readonly value="<?php echo $p->harga ?>"></td>
+                    <td><?php echo $p->nama_produk;?></td>
+                    <td><input type="text" name="hargaa" id="hargaa" readonly value="<?php echo $p->harga ?>">
+                    <input type="text" hidden name="id_produk" id="id_produk"  value="<?php echo $p->id_produk ?>"></td>
                     <td><input type="text" name="jumlah" id="jumlah" value="1"></td>
                     <td><input type="text" name="total" id="total" value=""></td>
+                    
                     </tr>
                     <?php $no++; endforeach;?>
-                    </form>
+                    
                   </tbody>
                 </table>
 
                 <button type="submit" class="btn btn-danger">ORDER</button>
-
+                </form>
               </div>
               <!--Card content-->
 
@@ -207,11 +209,11 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#jumlah, #harga").keyup(function() {
-            var harga  = $("#harga").val();
+        $("#jumlah, #hargaa").keyup(function() {
+            var hargaa  = $("#hargaa").val();
             var jumlah = $("#jumlah").val();
 
-            var total = parseInt(harga) * parseInt(jumlah);
+            var total = parseInt(hargaa) * parseInt(jumlah);
             $("#total").val(total);
         });
     });
