@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2021 at 08:36 AM
+-- Generation Time: Apr 10, 2021 at 09:26 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -42,7 +42,7 @@ CREATE TABLE `account` (
 
 INSERT INTO `account` (`id_account`, `username`, `password`, `saldo`, `id_role`) VALUES
 (1, 'admin', 'admin', 0, 1),
-(5, 'cek', '6ab97dc5c706cfdc425ca52a65d97b0d', 10000, 2);
+(5, 'cek', '6ab97dc5c706cfdc425ca52a65d97b0d', 8000, 2);
 
 -- --------------------------------------------------------
 
@@ -59,8 +59,20 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id_order`, `username`, `id_produk`, `jumlah`, `total`) VALUES
+(7, 'cek', 'PRO0001', 2, 2000);
+
+--
 -- Triggers `orders`
 --
+DELIMITER $$
+CREATE TRIGGER `saldoos` BEFORE INSERT ON `orders` FOR EACH ROW UPDATE account SET saldo = saldo - NEW.total 
+WHERE username = NEW.username
+$$
+DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `stokk` AFTER INSERT ON `orders` FOR EACH ROW UPDATE produk SET stok = stok - NEW.jumlah 
 WHERE id_produk = NEW.id_produk
@@ -85,7 +97,7 @@ CREATE TABLE `produk` (
 --
 
 INSERT INTO `produk` (`id_produk`, `nama_produk`, `harga`, `stok`) VALUES
-('PRO0001', 'Kacang', 1000, 10),
+('PRO0001', 'Kacang', 1000, 8),
 ('PRO0002', 'Manisan', 20000, 10);
 
 -- --------------------------------------------------------
@@ -149,7 +161,7 @@ ALTER TABLE `account`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

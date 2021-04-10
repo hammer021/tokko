@@ -34,7 +34,8 @@ class Member extends CI_Controller
         redirect(site_url("Home"));
        }
        else{
-        echo"Data gagal disimpan";
+        //echo"Data gagal disimpan";
+        echo "<script>alert('Data gagal disimpan');</script>";
        }
         redirect(site_url("Home"));
     }
