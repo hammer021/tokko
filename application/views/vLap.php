@@ -49,7 +49,7 @@
 						<table class="table">
 							<thead>
 								<tr>
-									<th>Username</th>
+									<th>Member</th>
 									<th>Nama Produk</th>
 									<th>Jumlah</th>
 									<th>Total</th>
