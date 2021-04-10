@@ -42,6 +42,6 @@ class HomeAdm extends CI_Controller {
 	}
 	public function transaksi()
     {
-        redirect(site_url("Transaksi"));
+        redirect(site_url("Order/Lap"));
 	}
 }

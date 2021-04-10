@@ -33,6 +33,13 @@ class order_model extends CI_Model
 
         ];
     }
+    public function getOrders()
+    {
+        return $this->db->query("SELECT * FROM orders  JOIN produk 
+        ON orders.id_produk = produk.id_produk 
+         WHERE orders.id_produk = produk.id_produk ")->result();
+    }
+    
 
     public function getAll()
     {
@@ -60,6 +67,6 @@ function update($where,$data,$table){
 }	
     public function hapus_data($id)
     {
-        return $this->db->delete($this->_table, array("id_produk" => $id));
+        return $this->db->delete($this->_table, array("id_order" => $id));
     }
 }

@@ -89,9 +89,9 @@
         <form method="post" action="<?php echo base_url('Member/save'); ?>" enctype="multipart/form-data">
 
         <div class="form-group">
-                <label name="nama_produk">Username</label>
+                <label name="username">Username</label>
                 <input type="text" name="username" class="form-control">
-                <label name="harga">Password</label>
+                <label name="password">Password</label>
                 <input type="password" name="password" class="form-control">
                 
         </div>

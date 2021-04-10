@@ -19,13 +19,23 @@ class Member extends CI_Controller
 
     public function save()
     {
-        $member = $this->member_model;
-        $validation = $this->form_validation;
-        $validation->set_rules($member->rules());
-        if ($validation->run()) {
-            $member->save();
-            $this->session->set_flashdata('success', 'Berhasil disimpan');
-        }
+        $username = $this->input->post('username');
+        $password = $this->input->post('password');
+       if($username!==null){
+        $data = array(
+            'username '    		        => $username,
+            'password'          		=> $password,
+            'saldo'                     =>'0',
+            'id_role'                   =>'2'
+
+        );
+
+        $this->member_model->save($data, 'account');
+        redirect(site_url("Home"));
+       }
+       else{
+        echo"Data gagal disimpan";
+       }
         redirect(site_url("Home"));
     }
     

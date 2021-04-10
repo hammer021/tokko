@@ -61,19 +61,10 @@ class member_model extends CI_Model
         $kode_jadi="M00".$kode_max;
         return $kode_jadi;
     }
-    public function save()
-    {
-       
-        $post = $this->input->post();
-        $pass = $post["password"];
-        // $this->id_account = $this->buat_kode();
-        $this->username = $post["username"];
-        $this->password = md5($pass);
-        $this->saldo = "0";
-        $this->id_role="2";
-
-        return $this->db->insert($this->_table, $this);
-    }
+    function save($data, $table){
+		$this->db->insert($table, $data);
+	}
+    
 
     public function update_data($where,$data){
 		$this->db->where($where);

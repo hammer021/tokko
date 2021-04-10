@@ -18,6 +18,11 @@ class Order extends CI_Controller
         $data["barang"] = $this->order_model->getAll();
         $this->load->view("vbarang",$data);
     }
+    public function Lap()
+    {
+        $data["lap"] = $this->order_model->getOrders();
+        $this->load->view("vLap",$data);
+    }
     public function add()
     {
 
@@ -115,6 +120,11 @@ class Order extends CI_Controller
     {
         $this->produk_model->hapus_data($id);
 		redirect('Produk');
+    }
+    public function hapusLap($id)
+    {
+        $this->order_model->hapus_data($id);
+		redirect('HomeAdm/transaksi');
     }
     
 }
